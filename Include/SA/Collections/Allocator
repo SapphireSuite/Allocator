@@ -1,0 +1,12 @@
+// Copyright (c) 2023 Sapphire's Suite. All Rights Reserved.
+
+#pragma once
+
+#ifndef SAPPHIRE_COLLECTIONS_ALLOCATOR_GUARD
+#define SAPPHIRE_COLLECTIONS_ALLOCATOR_GUARD
+
+#include <SA/Allocator/IAllocator.hpp>
+#include <SA/Allocator/NullAllocator.hpp>
+#include <SA/Allocator/CPUAllocator.hpp>
+
+#endif // SAPPHIRE_COLLECTIONS_ALLOCATOR_GUARD

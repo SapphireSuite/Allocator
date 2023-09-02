@@ -20,6 +20,11 @@ add_library(SA_Allocator STATIC)
 SA_ConfigureTarget(SA_Allocator)
 SA_TargetSources(SA_Allocator)
 
+### Link dependencies.
+target_link_libraries(SA_Allocator PUBLIC SA_Logger)
+
+
+
 # Options
 
 ## Add SA_Allocator's tests to build tree.
