@@ -16,45 +16,47 @@ int main()
 	SA_LOG((L"FreeList: %1", allocator.DebugFreeListStr()), Warning);
 
 	void* p1 = allocator.Allocate(25);
-
 	SA_LOG((L"Heap: %1", allocator.DebugHeapStr()));
 	SA_LOG((L"FreeList: %1", allocator.DebugFreeListStr()), Warning);
 
 	void* p2 = allocator.Allocate(27);
-
 	SA_LOG((L"Heap: %1", allocator.DebugHeapStr()));
 	SA_LOG((L"FreeList: %1", allocator.DebugFreeListStr()), Warning);
 
 	void* p3 = allocator.Allocate(104);
-
 	SA_LOG((L"Heap: %1", allocator.DebugHeapStr()));
 	SA_LOG((L"FreeList: %1", allocator.DebugFreeListStr()), Warning);
 
 	void* p4 = allocator.Allocate(200);
-
 	SA_LOG((L"Heap: %1", allocator.DebugHeapStr()));
 	SA_LOG((L"FreeList: %1", allocator.DebugFreeListStr()), Warning);
 
 	allocator.Free(p2);
-
 	SA_LOG((L"Heap: %1", allocator.DebugHeapStr()));
 	SA_LOG((L"FreeList: %1", allocator.DebugFreeListStr()), Warning);
 
 	allocator.Free(p3);
-
 	SA_LOG((L"Heap: %1", allocator.DebugHeapStr()));
 	SA_LOG((L"FreeList: %1", allocator.DebugFreeListStr()), Warning);
 
 	allocator.Free(p4);
-
 	SA_LOG((L"Heap: %1", allocator.DebugHeapStr()));
 	SA_LOG((L"FreeList: %1", allocator.DebugFreeListStr()), Warning);
 
 	allocator.Free(p1);
-
 	SA_LOG((L"Heap: %1", allocator.DebugHeapStr()));
 	SA_LOG((L"FreeList: %1", allocator.DebugFreeListStr()), Warning);
 	
+
+	// Triggers NoneAllocator.
+	void* p5 = allocator.Allocate(2000);
+	SA_LOG((L"Heap: %1", allocator.DebugHeapStr()));
+	SA_LOG((L"FreeList: %1", allocator.DebugFreeListStr()), Warning);
+
+	allocator.Free(p5);
+	SA_LOG((L"Heap: %1", allocator.DebugHeapStr()));
+	SA_LOG((L"FreeList: %1", allocator.DebugFreeListStr()), Warning);
+
 
 	allocator.Destroy();
 

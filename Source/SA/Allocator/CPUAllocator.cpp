@@ -1,7 +1,7 @@
 // Copyright (c) 2023 Sapphire's Suite. All Rights Reserved.
 
 #include <CPUAllocator.hpp>
-#include <NullAllocator.hpp>
+#include <NoneAllocator.hpp>
 
 namespace SA
 {
@@ -111,11 +111,9 @@ namespace SA
 
 		if(!meta)
 		{
-		#if SA_DEBUG
-			// THROW Out of memory exc.
-		#else
-			return NullAllocator::Instance.Allocate(_size);
-		#endif
+			SA_LOG(L"Allocator out of memory! Use NoneAllocator instead.", Warning, SA.Allocator);
+
+			return NoneAllocator::Instance.Allocate(_size);
 		}
 
 		// Detach block from free list.
@@ -132,11 +130,11 @@ namespace SA
 
 	void CPUAllocator::Free(void* _ptr)
 	{
-	#if SA_DEBUG
-		SA_ASSERT((Default, _ptr > mMemory && _ptr < static_cast<char*>(mMemory) + mTotalSize), SA.Allocator, L"Pointer to free must belong to this allocator!");
-	#else
-		NullAllocator::Instance.Free(_ptr);
-	#endif
+		if(_ptr <= mMemory || _ptr >= static_cast<char*>(mMemory) + mTotalSize)
+		{
+			NoneAllocator::Instance.Free(_ptr);
+			return;
+		}
 
 		const uint64_t blockAddr = reinterpret_cast<uint64_t>(_ptr);
 		Meta* meta = reinterpret_cast<Meta*>(blockAddr - sizeof(Meta));
@@ -282,8 +280,6 @@ namespace SA
 
 	void CPUAllocator::RemoveFreeMeta(FreeMeta* _meta)
 	{
-		const uint64_t freeSize = _meta->GetBlockSize();
-
 		if(_meta->prevFree)
 			_meta->prevFree = _meta->nextFree;
 		else
