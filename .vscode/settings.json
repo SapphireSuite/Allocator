@@ -1,0 +1,13 @@
+{
+	"files.associations": {
+		"compare": "cpp",
+		"cstdint": "cpp",
+		"*.tcc": "cpp",
+		"vector": "cpp",
+		"deque": "cpp",
+		"list": "cpp",
+		"string": "cpp",
+		"unordered_map": "cpp",
+		"system_error": "cpp"
+	}
+}
